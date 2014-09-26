@@ -1,0 +1,84 @@
+apply plugin: 'android'
+apply plugin: 'android-apt'
+def AAVersion = '3.1'
+
+mainClassName = "com.example.test.oktest.testMain_"
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        // replace with the current version of the Android plugin
+        classpath 'com.android.tools.build:gradle:0.13+'
+        // the latest version of the android-apt plugin
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    apt "org.androidannotations:androidannotations:$AAVersion"
+    compile "org.androidannotations:androidannotations-api:$AAVersion"
+    compile 'com.android.support:support-v4:20.0.0'
+}
+
+apt {
+    arguments {
+        androidManifestFile variant.processResources.manifestFile
+        resourcePackageName 'com.example.test.oktest'
+    }
+}
+
+android {
+
+    compileSdkVersion 20
+    buildToolsVersion '20.0.0'
+
+    signingConfigs {
+        release {
+            storeFile file('keystore_file')
+            storePassword 'keystore_pass'
+            keyAlias 'key_alias'
+            keyPassword 'key_pass'
+        }
+    }
+
+    defaultConfig {
+        applicationId 'com.example.test.oktest'
+        minSdkVersion 15
+        targetSdkVersion 20
+        versionCode 1
+        versionName '1.0'
+    }
+
+    buildTypes {
+        release {
+            runProguard true
+            debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            signingConfig signingConfigs.release
+            zipAlign true
+        }
+        debug {
+            runProguard false
+            debuggable true
+            applicationIdSuffix ".debug"
+            zipAlign false
+        }
+    }
+
+    /*sourceSets {
+        main {
+            manifest.srcFile 'src/main/AndroidManifest.xml'
+            java.srcDirs = ['src/main/java']
+            resources.srcDirs = ['src/main/resources']
+            res.srcDirs = ['src/main/res']
+            assets.srcDirs = ['src/main/assets']
+        }
+    }*/
+}
