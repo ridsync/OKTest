@@ -1,6 +1,7 @@
 package com.example.test.oktest;
 
 import android.app.Activity;
+import android.content.Intent;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
@@ -15,7 +16,7 @@ public class AnnoTationTest extends Activity{
     public void init(){}
 
     @Override
-    public boolean onNavigateUp() {
-        return super.onNavigateUp();
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
