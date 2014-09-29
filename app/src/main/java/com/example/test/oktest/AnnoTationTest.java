@@ -14,4 +14,8 @@ public class AnnoTationTest extends Activity{
     @AfterViews
     public void init(){}
 
+    @Override
+    public boolean onNavigateUp() {
+        return super.onNavigateUp();
+    }
 }
