@@ -1,8 +1,17 @@
+/*
+     Android Project Example Sources
+     1. NavigationDrawer + ActionBar(DrowpDown,FixedTabsSwipe)
+     2. ViewPager (PagerTabStrip,PagerTitleStrip,,ScrollTab)
+     3. IndexListView + PullToRefreshView
+     4. PoppyView
+     5. FadingActionBar
+  */
+
 apply plugin: 'android'
 apply plugin: 'android-apt'
 def AAVersion = '3.1'
 
-mainClassName = "com.example.test.oktest.testMain_"
+mainClassName = "com.example.test.oktest.NavigationActivity_"
 
 buildscript {
     repositories {
