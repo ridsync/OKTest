@@ -1,26 +1,30 @@
 package com.example.test.oktest;
 
-import android.app.Activity;
-
+import android.annotation.TargetApi;
 import android.app.ActionBar;
-import android.app.Fragment;
-import android.app.FragmentManager;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v4.widget.DrawerLayout;
+import android.widget.ArrayAdapter;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 
 @EActivity(R.layout.activity_test_main)
-public class NavigationActivity extends Activity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+public class NavigationActivity extends FragmentActivity
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks , ActionBar.OnNavigationListener{
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -36,14 +40,64 @@ public class NavigationActivity extends Activity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Set up the action bar to show a dropdown list.
+        final ActionBar actionBar = getActionBar();
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+        String[] DropdownName = {getString(R.string.title_section1),
+                getString(R.string.title_section2), getString(R.string.title_section3), getString(R.string.title_section4)};
+
+        // Set up the dropdown list navigation in the action bar.
+        actionBar.setListNavigationCallbacks(
+                // Specify a SpinnerAdapter to populate the dropdown list.
+                new ArrayAdapter<String>(getActionBarThemedContextCompat(),
+                        android.R.layout.simple_list_item_1,
+                        android.R.id.text1, DropdownName), this);
+
     }
 
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+    private Context getActionBarThemedContextCompat() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+            return getActionBar().getThemedContext();
+        } else {
+            return this;
+        }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(int position, long id) {
+        // When the given dropdown item is selected, show its contents in the
+        // container view.
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container,
+                        getFragmentView(getApplicationContext(), position))
+                .commit();
+        return true;
+    }
+
+    private Fragment getFragmentView(Context mContext, int position) {
+        switch (position) {
+            case 0:
+                return PlaceholderFragment.newInstance(position+1);
+            case 1:
+                return PlaceholderFragment.newInstance(position+1);
+            case 2:
+                return PlaceholderFragment.newInstance(position+1);
+            case 3:
+                return new ViewPagerFragment(); // ViewPager + FixedTabsSwipe
+            default:
+                return PlaceholderFragment.newInstance(position);
+        }
+    }
     @AfterViews
     public void initViews(){
         Log.d("TAG","@AfterViews ");
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
-                getFragmentManager().findFragmentById(R.id.navigation_drawer);
+                getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
 
         // Set up the drawer.
@@ -60,9 +114,10 @@ public class NavigationActivity extends Activity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container,
+                        getFragmentView(getApplicationContext(), position))
                 .commit();
     }
 
@@ -76,6 +131,9 @@ public class NavigationActivity extends Activity
                 break;
             case 3:
                 mTitle = getString(R.string.title_section3);
+                break;
+            case 4:
+                mTitle = getString(R.string.title_section4);
                 break;
         }
     }
@@ -95,7 +153,8 @@ public class NavigationActivity extends Activity
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
             getMenuInflater().inflate(R.menu.test_main, menu);
-            restoreActionBar();
+//            restoreActionBar();
+            Log.d("Navigation", "onCreateOptionsMenu");
             return true;
         }
         return super.onCreateOptionsMenu(menu);
