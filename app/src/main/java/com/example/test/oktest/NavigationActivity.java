@@ -9,7 +9,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,16 +17,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.TextView;
+
+import com.example.test.oktest.FadingActionBar.MainActivity;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 
 @EActivity(R.layout.activity_test_main)
-public class NavigationActivity extends FragmentActivity
+class NavigationActivity extends FragmentActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks , ActionBar.OnNavigationListener{
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
+     * http://itmir.tistory.com/526
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
@@ -92,6 +96,7 @@ public class NavigationActivity extends FragmentActivity
                 return PlaceholderFragment.newInstance(position);
         }
     }
+
     @AfterViews
     public void initViews(){
         Log.d("TAG","@AfterViews ");
@@ -181,7 +186,6 @@ public class NavigationActivity extends FragmentActivity
          * fragment.
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
-
         /**
          * Returns a new instance of this fragment for the given section
          * number.
@@ -201,7 +205,18 @@ public class NavigationActivity extends FragmentActivity
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.frag_test_main, container, false);
-
+            TextView tv = (TextView)rootView.findViewById(R.id.section_label_2);
+            Button bt = (Button)rootView.findViewById(R.id.section_label);
+            bt.setOnClickListener(new View.OnClickListener() {
+                      @Override
+                      public void onClick(View v) {
+                          Intent intent = new Intent(getActivity(), MainActivity.class);
+                            startActivity(intent);
+                      }
+                  }
+            );
+            int num = getArguments().getInt(ARG_SECTION_NUMBER);
+            tv.setText(String.valueOf(num));
             return rootView;
         }
 

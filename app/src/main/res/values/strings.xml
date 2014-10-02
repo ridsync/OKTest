@@ -21,4 +21,19 @@
     <string name="tab2_text">HomePage : https://whdghks913.tistory.com</string>
     <string name="example">Example Source</string>
 
+    <string name="Scrollview_Text_1">FadingActionBar is a library which implements the cool fading action bar effect that can be seen in the new Play Music app.
+\n
+\nThis library uses the techniques outlined by Cyril Mottier in a popular blog post.
+\n
+\nThe three most commonly used action bar implementations are supported: stock (API 11+), ActionBarCompat and ActionBarSherlock.</string>
+    <string name="Scrollview_Text_2">FadingActionBar 사용방법
+\n
+\n
+\nFadingActionBarHelper helper = new FadingActionBarHelper()
+\n                .actionBarBackground(R.drawable.ab_background)
+\n                .headerLayout(R.layout.header)
+\n                .contentLayout(R.layout.activity_main);
+\n        setContentView(helper.createView(this));
+\n        helper.initActionBar(this);</string>
+
 </resources>

@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import java.util.Locale;
 
 /**
+ * ViewPager + FixedTab + ScrollTab(PagerTitleStrip)
  * Created by ojungwon on 2014-10-01.
  */
 public class ViewPagerFragment extends Fragment implements
