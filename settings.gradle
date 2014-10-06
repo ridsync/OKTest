@@ -1,2 +1,1 @@
-include  'libraries:fadingactionbarlibrary',':app'
-//project(':fadingactionbarlibrary').projectDir = new File('libraries/fadingactionbarlibrary')
+include ':app', 'libraries:fablibrary'
