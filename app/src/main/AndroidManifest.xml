@@ -15,6 +15,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!--
+        Style 적용해야 ActionBar 배경이 Transparent 적용됩니다.
+        -->
         <activity
             android:name=".FadingActionBar.MainActivity"
             android:label="MainActivity"
