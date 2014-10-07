@@ -1,10 +1,13 @@
 /*
      Android Project Example Sources
      1. NavigationDrawer + ActionBar(DrowpDown,FixedTabsSwipe)
-     2. ViewPager (PagerTabStrip,PagerTitleStrip,,ScrollTab)
-     3. IndexListView + PullToRefreshView
-     4. PoppyView
-     5. FadingActionBar
+     2. ViewPager (PagerTabStrip,PagerTitleStrip,ScrollTab)
+     3. FadingActionBar
+     4. PullToRefreshView(https://github.com/chrisbanes/Android-PullToRefresh)
+     4-2. PullToRefreshView(https://github.com/chrisbanes/ActionBar-PullToRefresh)
+     참고 : http://helloworld.naver.com/helloworld/textyle/675437
+     5. PoppyView (http://itmir.tistory.com/527)
+
   */
 
 apply plugin: 'android'
