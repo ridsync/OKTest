@@ -1,4 +1,14 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+/*
+     Android Project Example Sources
+     1. NavigationDrawer + ActionBar(DrowpDown,FixedTabsSwipe)
+     2. ViewPager (PagerTabStrip,PagerTitleStrip,ScrollTab)
+     3. FadingActionBar 까지 적용함
+     4. PullToRefreshView(https://github.com/chrisbanes/Android-PullToRefresh)
+     4-2. PullToRefreshView(https://github.com/chrisbanes/ActionBar-PullToRefresh)
+     참고 : http://helloworld.naver.com/helloworld/textyle/675437
+     5. PoppyView (http://itmir.tistory.com/527)
+  */
 apply plugin: 'application'
 
 buildscript {
