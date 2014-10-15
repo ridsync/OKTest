@@ -1,3 +1,13 @@
+/*
+     Android Project Example Sources
+     1. NavigationDrawer + ActionBar(DrowpDown,FixedTabsSwipe)
+     2. ViewPager (PagerTabStrip,PagerTitleStrip,ScrollTab)
+     3. FadingActionBar 까지 적용함
+     4. PullToRefreshView(https://github.com/naver/android-pull-to-refresh)
+     4-2. PullToRefreshView(https://github.com/chrisbanes/ActionBar-PullToRefresh)
+     참고 : http://helloworld.naver.com/helloworld/textyle/675437
+     5. PoppyView (http://itmir.tistory.com/527)
+  */
 apply plugin: 'android'
 apply plugin: 'android-apt'
 def AAVersion = '3.1'
