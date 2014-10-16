@@ -1,12 +1,17 @@
-/*
+/*   ※ SlidingMenuView + ActionBar 컨트롤 라이브러리
      Android Project Example Sources
      1. NavigationDrawer + ActionBar(DrowpDown,FixedTabsSwipe)
      2. ViewPager (PagerTabStrip,PagerTitleStrip,ScrollTab)
      3. FadingActionBar 까지 적용함
-     4. PullToRefreshView(https://github.com/naver/android-pull-to-refresh)
-     4-2. PullToRefreshView(https://github.com/chrisbanes/ActionBar-PullToRefresh)
+     4. SlidingMenu
+        1) https://github.com/jfeinstein10/SlidingMenu
+        2) http://www.androidhive.info/2013/11/android-sliding-menu-using-navigation-drawer/
+     4-2. SlidingPaneLayout (http://aroundck.tistory.com/2532)
+
+     5. PullToRefreshView(https://github.com/naver/android-pull-to-refresh)
+     5-2. PullToRefreshView(https://github.com/chrisbanes/ActionBar-PullToRefresh)
      참고 : http://helloworld.naver.com/helloworld/textyle/675437
-     5. PoppyView (http://itmir.tistory.com/527)
+     6. PoppyView (http://itmir.tistory.com/527)
   */
 apply plugin: 'android'
 apply plugin: 'android-apt'

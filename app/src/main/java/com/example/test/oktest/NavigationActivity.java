@@ -45,8 +45,12 @@ class NavigationActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
 
         // Set up the action bar to show a dropdown list.
+        // ActionBar를 각 Contents Fragment에서 설정하도록 하는게 나을듯?
+        // ActionBar + ViewPager 연동을 하기에...
         final ActionBar actionBar = getActionBar();
-        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setDisplayShowTitleEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeButtonEnabled(true);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         String[] DropdownName = {getString(R.string.title_section1),
@@ -61,6 +65,25 @@ class NavigationActivity extends FragmentActivity
 
     }
 
+    @AfterViews
+    public void initViews(){
+        Log.d("TAG","@AfterViews ");
+
+        mNavigationDrawerFragment = (NavigationDrawerFragment)
+                getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
+        mTitle = getTitle();
+
+        // Set up the drawer.
+        mNavigationDrawerFragment.setUp(
+                R.id.navigation_drawer,
+                (DrawerLayout) findViewById(R.id.drawer_layout));
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     private Context getActionBarThemedContextCompat() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
@@ -68,6 +91,16 @@ class NavigationActivity extends FragmentActivity
         } else {
             return this;
         }
+    }
+
+    @Override
+    public void onNavigationDrawerItemSelected(int position) {
+        // update the main content by replacing fragments
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container,
+                        getFragmentView(getApplicationContext(), position))
+                .commit();
     }
 
     @Override
@@ -95,35 +128,6 @@ class NavigationActivity extends FragmentActivity
             default:
                 return PlaceholderFragment.newInstance(position);
         }
-    }
-
-    @AfterViews
-    public void initViews(){
-        Log.d("TAG","@AfterViews ");
-
-        mNavigationDrawerFragment = (NavigationDrawerFragment)
-                getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
-        mTitle = getTitle();
-
-        // Set up the drawer.
-        mNavigationDrawerFragment.setUp(
-                R.id.navigation_drawer,
-                (DrawerLayout) findViewById(R.id.drawer_layout));
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    @Override
-    public void onNavigationDrawerItemSelected(int position) {
-        // update the main content by replacing fragments
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.container,
-                        getFragmentView(getApplicationContext(), position))
-                .commit();
     }
 
     public void onSectionAttached(int number) {
@@ -186,6 +190,7 @@ class NavigationActivity extends FragmentActivity
          * fragment.
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
+        private static final String ARG_SECTION_DRAWER_ITEM = "nav_drawer_item";
         /**
          * Returns a new instance of this fragment for the given section
          * number.
@@ -194,6 +199,7 @@ class NavigationActivity extends FragmentActivity
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+//            args.putParcelable(ARG_SECTION_DRAWER_ITEM, item);
             fragment.setArguments(args);
             return fragment;
         }
@@ -216,7 +222,7 @@ class NavigationActivity extends FragmentActivity
                   }
             );
             int num = getArguments().getInt(ARG_SECTION_NUMBER);
-            tv.setText(String.valueOf(num));
+            tv.setText("SECTION_NUMBER  = " + String.valueOf(num));
             return rootView;
         }
 
