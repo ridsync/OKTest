@@ -27,7 +27,7 @@ import org.androidannotations.annotations.EActivity;
 
 @EActivity(R.layout.activity_test_main)
 class NavigationActivity extends FragmentActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks , ActionBar.OnNavigationListener{
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -36,7 +36,7 @@ class NavigationActivity extends FragmentActivity
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
     /**
-     * Used to store the last screen title. For use in {@link #restoreActionBar()}.
+     * Used to store the last screen title. For use in {@link #setActionTitle()}.
      */
     private CharSequence mTitle = getTitle();
 
@@ -51,17 +51,6 @@ class NavigationActivity extends FragmentActivity
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
-        String[] DropdownName = {getString(R.string.title_section1),
-                getString(R.string.title_section2), getString(R.string.title_section3), getString(R.string.title_section4)};
-
-        // Set up the dropdown list navigation in the action bar.
-        actionBar.setListNavigationCallbacks(
-                // Specify a SpinnerAdapter to populate the dropdown list.
-                new ArrayAdapter<String>(getActionBarThemedContextCompat(),
-                        android.R.layout.simple_list_item_1,
-                        android.R.id.text1, DropdownName), this);
 
     }
 
@@ -85,7 +74,7 @@ class NavigationActivity extends FragmentActivity
     }
 
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-    private Context getActionBarThemedContextCompat() {
+    public Context getActionBarThemedContextCompat() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
             return getActionBar().getThemedContext();
         } else {
@@ -94,66 +83,54 @@ class NavigationActivity extends FragmentActivity
     }
 
     @Override
-    public void onNavigationDrawerItemSelected(int position) {
+    public void onNavigationDrawerItemSelected(NavDrawerItem item) {
         // update the main content by replacing fragments
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.container,
-                        getFragmentView(getApplicationContext(), position))
+                        getFragmentView(getApplicationContext(), item))
                 .commit();
     }
 
-    @Override
-    public boolean onNavigationItemSelected(int position, long id) {
-        // When the given dropdown item is selected, show its contents in the
-        // container view.
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.container,
-                        getFragmentView(getApplicationContext(), position))
-                .commit();
-        return true;
-    }
-
-    private Fragment getFragmentView(Context mContext, int position) {
-        switch (position) {
+    private Fragment getFragmentView(Context mContext, NavDrawerItem item) {
+        switch (item.getPosition()) {
             case 0:
-                return PlaceholderFragment.newInstance(position+1);
+                return PlaceholderFragment.newInstance(item.getPosition()+1);
             case 1:
-                return PlaceholderFragment.newInstance(position+1);
+                return PlaceholderFragment.newInstance(item.getPosition()+1);
             case 2:
-                return PlaceholderFragment.newInstance(position+1);
+                return new SwipeRereshFragment();
             case 3:
                 return new ViewPagerFragment(); // ViewPager + FixedTabsSwipe
             default:
-                return PlaceholderFragment.newInstance(position);
+                return PlaceholderFragment.newInstance(item.getPosition());
         }
     }
 
     public void onSectionAttached(int number) {
         switch (number) {
             case 1:
-                mTitle = getString(R.string.title_section1);
+                mTitle = "1 (SectionAttached)";
                 break;
             case 2:
-                mTitle = getString(R.string.title_section2);
+                mTitle = "2 (SectionAttached)";
                 break;
             case 3:
-                mTitle = getString(R.string.title_section3);
+                mTitle = "3 (SectionAttached)";
                 break;
             case 4:
-                mTitle = getString(R.string.title_section4);
+                mTitle = "4 (SectionAttached)";
                 break;
         }
+        setActionTitle();
     }
 
-    public void restoreActionBar() {
+    public void setActionTitle() {
         ActionBar actionBar = getActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
+        actionBar.setSubtitle("subtitle");
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -161,7 +138,7 @@ class NavigationActivity extends FragmentActivity
             // Only show items in the action bar relevant to this screen
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
-            getMenuInflater().inflate(R.menu.test_main, menu);
+            getMenuInflater().inflate(R.menu.nav_main, menu);
 //            restoreActionBar();
             Log.d("Navigation", "onCreateOptionsMenu");
             return true;
@@ -184,7 +161,7 @@ class NavigationActivity extends FragmentActivity
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderFragment extends Fragment {
+    public static class PlaceholderFragment extends BaseFragment implements ActionBar.OnNavigationListener{
         /**
          * The fragment argument representing the section number for this
          * fragment.
@@ -223,14 +200,27 @@ class NavigationActivity extends FragmentActivity
             );
             int num = getArguments().getInt(ARG_SECTION_NUMBER);
             tv.setText("SECTION_NUMBER  = " + String.valueOf(num));
+
             return rootView;
+        }
+
+        @Override
+        public boolean onNavigationItemSelected(int position, long id) {
+            // When the given dropdown item is selected, show its contents in the
+            // container view.
+
+            return true;
+        }
+
+        @Override
+        protected void setActionBarOnResume(Activity activity, ActionBar actionbar) {
+            ((NavigationActivity) activity).onSectionAttached(
+                    getArguments().getInt(ARG_SECTION_NUMBER));
         }
 
         @Override
         public void onAttach(Activity activity) {
             super.onAttach(activity);
-            ((NavigationActivity) activity).onSectionAttached(
-                    getArguments().getInt(ARG_SECTION_NUMBER));
         }
     }
 

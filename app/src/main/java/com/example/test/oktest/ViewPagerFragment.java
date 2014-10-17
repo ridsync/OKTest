@@ -20,7 +20,7 @@ import java.util.Locale;
  * ViewPager + FixedTab + ScrollTab(PagerTitleStrip)
  * Created by ojungwon on 2014-10-01.
  */
-public class ViewPagerFragment extends Fragment implements
+public class ViewPagerFragment extends BaseFragment implements
         ActionBar.TabListener{
 
 
@@ -40,23 +40,9 @@ public class ViewPagerFragment extends Fragment implements
     ViewPager mViewPager;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        View rootView = inflater.inflate(R.layout.viewpager_fragment, null);
-
-        // Set up the action bar.
-        final ActionBar actionBar = getActivity().getActionBar();
-        actionBar.removeAllTabs();
+    protected void setActionBarOnResume(Activity activity, final ActionBar actionBar) {
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the app.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(
-                getActivity().getApplicationContext(), getActivity().getSupportFragmentManager());
-
-        // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) rootView.findViewById(R.id.pager);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
+        actionBar.setTitle(ViewPagerFragment.class.getSimpleName());
 
         // When swiping between different sections, select the corresponding
         // tab. We can also use ActionBar.Tab#select() to do this if we have
@@ -79,6 +65,23 @@ public class ViewPagerFragment extends Fragment implements
                     .setText(mSectionsPagerAdapter.getPageTitle(i))
                     .setTabListener(this));
         }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        View rootView = inflater.inflate(R.layout.viewpager_fragment, null);
+
+        // Create the adapter that will return a fragment for each of the three
+        // primary sections of the app.
+        mSectionsPagerAdapter = new SectionsPagerAdapter(
+                getActivity().getApplicationContext(), getActivity().getSupportFragmentManager());
+
+        // Set up the ViewPager with the sections adapter.
+        mViewPager = (ViewPager) rootView.findViewById(R.id.pager);
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+
+
         return  rootView;
     }
 
@@ -124,14 +127,16 @@ public class ViewPagerFragment extends Fragment implements
                     return new Tab2(mContext);
                 case 2:
                     return new Tab3(mContext);
+                case 3:
+                    return new Tab4(mContext);
             }
             return null;
         }
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 3;
+            // Show 4 total pages.
+            return 4;
         }
 
         @Override
@@ -144,13 +149,12 @@ public class ViewPagerFragment extends Fragment implements
                     return getString(R.string.title_section2).toUpperCase(l);
                 case 2:
                     return getString(R.string.title_section3).toUpperCase(l);
+                case 3:
+                    return getString(R.string.title_section4).toUpperCase(l);
             }
             return null;
         }
     }
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        ((NavigationActivity) activity).onSectionAttached( 4 );
-    }
+
+
 }

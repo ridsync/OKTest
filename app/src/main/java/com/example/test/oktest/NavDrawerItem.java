@@ -5,6 +5,7 @@ package com.example.test.oktest;
  */
 public class NavDrawerItem {
 
+    private int position;
     private String title;
     private int icon;
     private String count = "0";
@@ -13,12 +14,14 @@ public class NavDrawerItem {
 
     public NavDrawerItem(){}
 
-    public NavDrawerItem(String title, int icon){
+    public NavDrawerItem(int position, String title, int icon){
+        this.position = position;
         this.title = title;
         this.icon = icon;
     }
 
-    public NavDrawerItem(String title, int icon, boolean isCounterVisible, String count){
+    public NavDrawerItem(int position, String title, int icon, boolean isCounterVisible, String count){
+        this.position = position;
         this.title = title;
         this.icon = icon;
         this.isCounterVisible = isCounterVisible;
@@ -29,6 +32,9 @@ public class NavDrawerItem {
         return this.title;
     }
 
+    public int getPosition(){
+        return this.position;
+    }
     public int getIcon(){
         return this.icon;
     }
@@ -43,6 +49,10 @@ public class NavDrawerItem {
 
     public void setTitle(String title){
         this.title = title;
+    }
+
+    public void setPosition(int position){
+        this.position = position;
     }
 
     public void setIcon(int icon){
