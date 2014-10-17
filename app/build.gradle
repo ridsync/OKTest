@@ -8,12 +8,15 @@
         2) http://www.androidhive.info/2013/11/android-sliding-menu-using-navigation-drawer/
      4-2. SlidingPaneLayout (http://aroundck.tistory.com/2532)
 
-     SwipeRefreshLayout
-     5. PullToRefreshView(https://github.com/naver/android-pull-to-refresh)
-     5-1. (https://github.com/chrisbanes/Android-PullToRefresh)  https://github.com/johannilsson/android-pulltorefresh
-     5-2. PullToRefreshView(https://github.com/chrisbanes/ActionBar-PullToRefresh)
+     5. PinnedSectionListview https://github.com/beworker/pinned-section-listview
+        FastScrollListView (http://androidopentutorials.com/android-listview-fastscroll/) + http://www.survivingwithandroid.com/2012/12/android-listview-sectionindexer-fastscroll.html
+     6. SwipeRefreshLayout
+     7. PullToRefreshView(https://github.com/naver/android-pull-to-refresh)
+        (https://github.com/chrisbanes/Android-PullToRefresh)
+        https://github.com/johannilsson/android-pulltorefresh
+        PullToRefreshView(https://github.com/chrisbanes/ActionBar-PullToRefresh)
      참고 : http://helloworld.naver.com/helloworld/textyle/675437
-     6. PoppyView (http://itmir.tistory.com/527)
+     8. PoppyView (http://itmir.tistory.com/527)
   */
 apply plugin: 'android'
 apply plugin: 'android-apt'

@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.test.oktest.FadingActionBar.MainActivity;
+import com.example.test.oktest.pinnedsection.PinnedSectionListViewFragment;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
@@ -95,12 +96,14 @@ class NavigationActivity extends FragmentActivity
     private Fragment getFragmentView(Context mContext, NavDrawerItem item) {
         switch (item.getPosition()) {
             case 0:
-                return PlaceholderFragment.newInstance(item.getPosition()+1);
+                return PlaceholderFragment.newInstance(item.getPosition());
             case 1:
-                return PlaceholderFragment.newInstance(item.getPosition()+1);
+                return PlaceholderFragment.newInstance(item.getPosition());
             case 2:
                 return new SwipeRereshFragment();
             case 3:
+                return new PinnedSectionListViewFragment();
+            case 4:
                 return new ViewPagerFragment(); // ViewPager + FixedTabsSwipe
             default:
                 return PlaceholderFragment.newInstance(item.getPosition());
@@ -108,20 +111,9 @@ class NavigationActivity extends FragmentActivity
     }
 
     public void onSectionAttached(int number) {
-        switch (number) {
-            case 1:
-                mTitle = "1 (SectionAttached)";
-                break;
-            case 2:
-                mTitle = "2 (SectionAttached)";
-                break;
-            case 3:
-                mTitle = "3 (SectionAttached)";
-                break;
-            case 4:
-                mTitle = "4 (SectionAttached)";
-                break;
-        }
+
+         mTitle = mNavigationDrawerFragment.getNavMenuTitles(number);
+
         setActionTitle();
     }
 

@@ -42,7 +42,7 @@ public class SwipeRereshFragment extends BaseFragment implements SwipeRefreshLay
     @Override
     protected void setActionBarOnResume(Activity activity, ActionBar actionBar) {
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-        actionBar.setTitle(SwipeRereshFragment.class.getSimpleName());
+//        actionBar.setTitle(SwipeRereshFragment.class.getSimpleName());
 
         String[] DropdownName = {getString(R.string.title_section1),
                 getString(R.string.title_section2), getString(R.string.title_section3), getString(R.string.title_section4)};

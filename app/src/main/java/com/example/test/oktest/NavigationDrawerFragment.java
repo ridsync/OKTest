@@ -61,7 +61,8 @@ public class NavigationDrawerFragment extends Fragment {
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
     private ArrayList<NavDrawerItem> navDrawerItems;
-    String[] navMenuTitles;
+
+    private String[] navMenuTitles;
 
     public NavigationDrawerFragment() {
     }
@@ -95,7 +96,7 @@ public class NavigationDrawerFragment extends Fragment {
         // adding nav drawer items to array
         // Home
         navDrawerItems = new ArrayList<NavDrawerItem>();
-        navMenuTitles = getResources().getStringArray(R.array.nav_drawer_items);
+        navMenuTitles = getResources().getStringArray(R.array.nav_drawer_menu_items);
         TypedArray navMenuIcons = getResources().obtainTypedArray(R.array.nav_drawer_icons);
         navDrawerItems.add(new NavDrawerItem(0,navMenuTitles[0], navMenuIcons.getResourceId(0, -1)));
         // Find People
@@ -297,5 +298,13 @@ public class NavigationDrawerFragment extends Fragment {
          * Called when an item in the navigation drawer is selected.
          */
         void onNavigationDrawerItemSelected(NavDrawerItem navDrawerItems);
+    }
+
+    public String getNavMenuTitles(int i) {
+        if (i < navMenuTitles.length){
+            return navMenuTitles[i];
+        }else {
+            return new String();
+        }
     }
 }

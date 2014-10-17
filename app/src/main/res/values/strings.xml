@@ -41,7 +41,7 @@
     <string name="desc_list_item_icon">Item Icon</string>
 
     <!-- Nav Drawer Menu Items -->
-    <string-array name="nav_drawer_items">
+    <string-array name="nav_drawer_menu_items">
         <item >Home</item>
         <item >Find People</item>
         <item >Photos</item>
@@ -78,5 +78,12 @@
         <item>Richard IIIIIIIIIII</item>
         <item>Richard IIIIIIIIIIII</item>
     </string-array>
+
+    <string name="pinned_name">Pinned Section Demo</string>
+    <string name="action_fastscroll">Fast scroll</string>
+    <string name="action_addpadding">Add padding</string>
+    <string name="action_showShadow">Show shadow</string>
+    <string name="action_showHeaderAndFooter">Show Header &amp; Footer</string>
+    <string name="action_updateDataset">Update dataset</string>
 
 </resources>

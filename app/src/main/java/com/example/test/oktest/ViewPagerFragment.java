@@ -42,7 +42,7 @@ public class ViewPagerFragment extends BaseFragment implements
     @Override
     protected void setActionBarOnResume(Activity activity, final ActionBar actionBar) {
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        actionBar.setTitle(ViewPagerFragment.class.getSimpleName());
+//        actionBar.setTitle(ViewPagerFragment.class.getSimpleName());
 
         // When swiping between different sections, select the corresponding
         // tab. We can also use ActionBar.Tab#select() to do this if we have
