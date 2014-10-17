@@ -139,7 +139,7 @@ class NavigationActivity extends FragmentActivity
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
             getMenuInflater().inflate(R.menu.nav_main, menu);
-//            restoreActionBar();
+//            setActionTitle();
             Log.d("Navigation", "onCreateOptionsMenu");
             return true;
         }
