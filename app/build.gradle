@@ -17,6 +17,7 @@
         PullToRefreshView(https://github.com/chrisbanes/ActionBar-PullToRefresh)
      참고 : http://helloworld.naver.com/helloworld/textyle/675437
      8. PoppyView (http://itmir.tistory.com/527)
+     9. ScalableLayout
   */
 apply plugin: 'android'
 apply plugin: 'android-apt'

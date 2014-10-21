@@ -14,7 +14,6 @@
     <string name="action_drawer">Drawer</string>
     <string name="pref_dream_text_key">pref_dream_text</string>
     <string name="pref_dream_text_default">zzzZZZzzz</string>
-
     <string name="title_tab1">Tab 1</string>
     <string name="title_tab2">Tab 2</string>
     <string name="title_tab3">Tab 3</string>
@@ -22,7 +21,6 @@
     <string name="tab1_button">Button in First Tab</string>
     <string name="tab2_text">HomePage : https://whdghks913.tistory.com</string>
     <string name="example">Example Source</string>
-
     <string name="Scrollview_Text_1">FadingActionBar is a library which implements the cool fading action bar effect that can be seen in the new Play Music app.
 \n
 \nThis library uses the techniques outlined by Cyril Mottier in a popular blog post.
@@ -37,17 +35,16 @@
 \n                .contentLayout(R.layout.activity_main);
 \n        setContentView(helper.createView(this));
 \n        helper.initActionBar(this);</string>
-
     <string name="desc_list_item_icon">Item Icon</string>
 
     <!-- Nav Drawer Menu Items -->
     <string-array name="nav_drawer_menu_items">
-        <item >Home</item>
-        <item >Find People</item>
-        <item >Photos</item>
-        <item >Communities</item>
-        <item >Pages</item>
-        <item >What\'s Hot</item>
+        <item>Home</item>
+        <item>Find People</item>
+        <item>Photos</item>
+        <item>Communities</item>
+        <item>Pages</item>
+        <item>What\'s Hot</item>
     </string-array>
 
     <!-- Nav Drawer List Item Icons -->
@@ -62,6 +59,7 @@
     </array>
 
     <string name="empty">No items found!</string>
+
     <string-array name="kings">
         <item>Henry IV</item>
         <item>Henry V</item>
@@ -85,5 +83,6 @@
     <string name="action_showShadow">Show shadow</string>
     <string name="action_showHeaderAndFooter">Show Header &amp; Footer</string>
     <string name="action_updateDataset">Update dataset</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

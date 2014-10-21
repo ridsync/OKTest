@@ -16,7 +16,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -98,7 +97,7 @@ class NavigationActivity extends FragmentActivity
             case 0:
                 return PlaceholderFragment.newInstance(item.getPosition());
             case 1:
-                return PlaceholderFragment.newInstance(item.getPosition());
+                return SclablelayoutFragment.newInstance("SclablelayoutFragment","test",item.getPosition());
             case 2:
                 return new SwipeRereshFragment();
             case 3:
