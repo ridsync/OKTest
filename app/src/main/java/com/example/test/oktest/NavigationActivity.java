@@ -20,10 +20,13 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.test.oktest.FadingActionBar.MainActivity;
+import com.example.test.oktest.eventbus.MyEvent;
 import com.example.test.oktest.pinnedsection.PinnedSectionListViewFragment;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
+
+import de.greenrobot.event.EventBus;
 
 @EActivity(R.layout.activity_test_main)
 class NavigationActivity extends FragmentActivity
@@ -90,6 +93,9 @@ class NavigationActivity extends FragmentActivity
                 .replace(R.id.container,
                         getFragmentView(getApplicationContext(), item))
                 .commit();
+
+        MyEvent myEvent = new MyEvent();
+        EventBus.getDefault().post(myEvent);
     }
 
     private Fragment getFragmentView(Context mContext, NavDrawerItem item) {

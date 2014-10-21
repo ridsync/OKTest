@@ -7,8 +7,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.example.test.oktest.eventbus.MyEvent;
+import de.greenrobot.event.EventBus;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,6 +26,7 @@ import android.widget.TextView;
 public class SclablelayoutFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String TAG = "SclablelayoutFragment";
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private static final String ARG_PARAM3 = "param3";
@@ -55,10 +60,10 @@ public class SclablelayoutFragment extends Fragment {
         args.putString(ARG_PARAM2, param2);
         args.putInt(ARG_PARAM3, position);
         fragment.setArguments(args);
+
+        EventBus.getDefault().register(fragment);
+
         return fragment;
-    }
-    public SclablelayoutFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -68,13 +73,19 @@ public class SclablelayoutFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+//        EventBus.getDefault().register(fragment);
+    }
+
+    // EventBus Receive Event Methods
+    public void onEvent(MyEvent event){
+        Log.d(TAG, "EventBus  onEvent called !!!!! ");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        RelativeLayout rootView = (RelativeLayout)inflater.inflate(R.layout.scalable_main, null);
-
+        LinearLayout rootView = (LinearLayout)inflater.inflate(R.layout.scalable_main, null);
 
         return rootView;
     }
@@ -100,13 +111,14 @@ public class SclablelayoutFragment extends Fragment {
                 getArguments().getInt(ARG_PARAM3));
     }
 
-//    @Override
-//    public void onDetach() {
-//        super.onDetach();
+    @Override
+    public void onDetach() {
+        super.onDetach();
 //        mListener = null;
-//    }
+        EventBus.getDefault().unregister(this);
+    }
 
-//    /**
+    //    /**
 //     * This interface must be implemented by activities that contain this
 //     * fragment to allow an interaction in this fragment to be communicated
 //     * to the activity and potentially other fragments contained in that

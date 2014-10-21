@@ -18,6 +18,7 @@
      참고 : http://helloworld.naver.com/helloworld/textyle/675437
      8. PoppyView (http://itmir.tistory.com/527)
      9. ScalableLayout
+     10. EventBus (https://github.com/greenrobot/EventBus)
   */
 apply plugin: 'android'
 apply plugin: 'android-apt'
@@ -47,6 +48,7 @@ dependencies {
     apt "org.androidannotations:androidannotations:$AAVersion"
     compile "org.androidannotations:androidannotations-api:$AAVersion"
     compile project(':libraries:fablibrary')
+    compile 'de.greenrobot:eventbus:2.2.1'
 }
 
 apt {

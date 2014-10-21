@@ -38,14 +38,20 @@ public abstract class BaseFragment extends Fragment {
 
     @Override
     public void onAttach(Activity activity) {
-        Log.d(TAG, "onAttach");
+        Log.d(TAG, "onAttach ");
         super.onAttach(activity);
     }
 
     @Override
     public void onDetach() {
-        Log.d(TAG, "onDetach");
+        Log.d(TAG, "onDetach ");
         super.onDetach();
+    }
+
+    @Override
+    public void onPause() {
+        Log.d(TAG, "onPause ");
+        super.onPause();
     }
 
     protected abstract void setActionBarOnResume(Activity activity, ActionBar actionBar);
