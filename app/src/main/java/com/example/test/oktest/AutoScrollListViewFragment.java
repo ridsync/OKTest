@@ -23,7 +23,8 @@ import java.util.Arrays;
 import java.util.Vector;
 
 /**
- * 2) AutoScroll ListView  https://gist.github.com/jpardogo/70143625771697844896
+ * AutoScroll ListView  https://gist.github.com/jpardogo/70143625771697844896
+ * 겔러리뷰 AutoScroll 잘만든것 참고 https://github.com/jpardogo/ListBuddies
  *
  * Created by ojungwon on 2014-10-01.
  */
