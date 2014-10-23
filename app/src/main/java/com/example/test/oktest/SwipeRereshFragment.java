@@ -3,28 +3,26 @@ package com.example.test.oktest;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
-import java.util.Locale;
 import java.util.Vector;
 
 /**
- * https://github.com/AndroidExamples/SwipeRefreshLayout-ListViewExample
+ * 1) SwipeRefreshLayout https://github.com/AndroidExamples/SwipeRefreshLayout-ListViewExample
  * Created by ojungwon on 2014-10-01.
  */
 public class SwipeRereshFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
@@ -37,8 +35,40 @@ public class SwipeRereshFragment extends BaseFragment implements SwipeRefreshLay
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // if this is set true,
+        // Activity.onCreateOptionsMenu will call Fragment.onCreateOptionsMenu
+        // Activity.onOptionsItemSelected will call Fragment.onOptionsItemSelected
+        setHasOptionsMenu(true);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        // destroy all menu and re-call onCreateOptionsMenu
+        getActivity().invalidateOptionsMenu();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        // If the drawer is open, show the global app actions in the action bar. See also
+        // showGlobalContextActionBar, which controls the top-left area of the action bar.
+        Log.d("Navigation", SwipeRereshFragment.class.getSimpleName() + "=> onCreateOptionsMenu");
+        inflater.inflate(R.menu.swipe_main, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Log.d("Navigation", SwipeRereshFragment.class.getSimpleName() + "=> onOptionsItemSelected");
+        if (item.getItemId() == R.id.action_example) {
+            Toast.makeText(getActivity(), "AutoScrollTest", Toast.LENGTH_SHORT).show();
+            mAdapter.add("AutoScrollTest" + (mAdapter.getCount() + 1) );
+            mEmptyViewContainer.setRefreshing(false);
+            mAdapter.notifyDataSetChanged();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
     @Override
     protected void setActionBarOnResume(Activity activity, ActionBar actionBar) {
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
@@ -104,7 +134,6 @@ public class SwipeRereshFragment extends BaseFragment implements SwipeRefreshLay
         ListView listView = (ListView) view.findViewById(R.id.listView);
         listView.setEmptyView(mEmptyViewContainer);
         listView.setAdapter(mAdapter);
-
         return view;
     }
 

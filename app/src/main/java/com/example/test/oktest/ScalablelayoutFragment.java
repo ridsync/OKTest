@@ -5,11 +5,14 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.test.oktest.eventbus.MyEvent;
 import de.greenrobot.event.EventBus;
@@ -17,13 +20,13 @@ import de.greenrobot.event.EventBus;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link SclablelayoutFragment.OnFragmentInteractionListener} interface
+ * {@link ScalablelayoutFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link SclablelayoutFragment#newInstance} factory method to
+ * Use the {@link ScalablelayoutFragment#newInstance} factory method to
  * create an instance of this fragment.
  *
  */
-public class SclablelayoutFragment extends Fragment {
+public class ScalablelayoutFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String TAG = "SclablelayoutFragment";
@@ -53,8 +56,8 @@ public class SclablelayoutFragment extends Fragment {
      * @return A new instance of fragment SclablelayoutFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SclablelayoutFragment newInstance(String param1, String param2, int position) {
-        SclablelayoutFragment fragment = new SclablelayoutFragment();
+    public static ScalablelayoutFragment newInstance(String param1, String param2, int position) {
+        ScalablelayoutFragment fragment = new ScalablelayoutFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -74,7 +77,13 @@ public class SclablelayoutFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+        // if this is set true,
+        // Activity.onCreateOptionsMenu will call Fragment.onCreateOptionsMenu
+        // Activity.onOptionsItemSelected will call Fragment.onOptionsItemSelected
+        setHasOptionsMenu(true);
+
 //        EventBus.getDefault().register(fragment);
+        // onCreate 시점이 명확하지 않다... 화면보일때 호출안됨..
     }
 
     // EventBus Receive Event Methods
@@ -132,5 +141,32 @@ public class SclablelayoutFragment extends Fragment {
 //        // TODO: Update argument type and name
 //        public void onFragmentInteraction(Uri uri);
 //    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // destroy all menu and re-call onCreateOptionsMenu
+        getActivity().invalidateOptionsMenu();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        Log.d("Navigation", ScalablelayoutFragment.class.getSimpleName() + "=> onCreateOptionsMenu");
+        // If the drawer is open, show the global app actions in the action bar. See also
+        // showGlobalContextActionBar, which controls the top-left area of the action bar.
+        inflater.inflate(R.menu.swipe_main, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Log.d("Navigation", ScalablelayoutFragment.class.getSimpleName() + "=> onOptionsItemSelected");
+        if (item.getItemId() == R.id.action_example) {
+            Toast.makeText(getActivity(), "action_example on ScalableFragment", Toast.LENGTH_SHORT).show();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
 }

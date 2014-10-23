@@ -5,26 +5,66 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SclablelayoutFragment"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
     <com.example.test.oktest.ScalableLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/main_sl"
         android:background="@android:color/darker_gray"
-        sl:scale_base_width="300"
-        sl:scale_base_height="300" >
+        sl:scale_base_width="400"
+        sl:scale_base_height="500" >
 
         <LinearLayout
             android:id="@+id/layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?android:attr/windowBackground"
+            android:orientation="vertical"
+            sl:scale_left="0"
+            sl:scale_top="0"
+            sl:scale_width="400"
+            sl:scale_height="500">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="oktser1111"
+                android:textSize="15sp"
+                android:textAppearance="@android:style/TextAppearance.Medium" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="okser2222"
+                android:textAppearance="@android:style/TextAppearance.Medium" />
+
+            <TextView
+                android:id="@+id/sl_textview"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@android:color/black"
+                android:text="@string/hello_world"
+                android:textColor="@android:color/white"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_launcher"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/windowBackground"
             android:orientation="horizontal"
-            sl:scale_left="10"
-            sl:scale_top="100"
-            sl:scale_width="90"
-            sl:scale_height="90">
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -41,52 +81,37 @@
                 android:textAppearance="@android:style/TextAppearance.Medium" />
 
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/sl_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/black"
-            android:text="@string/hello_world"
-            android:textColor="@android:color/white"
-            sl:scale_left="20"
-            sl:scale_top="40"
-            sl:scale_height="30"
-            sl:scale_width="100"
-            sl:scale_textsize="20"
-            sl:textview_wrapcontent_direction="top"
-            sl:textview_wrapcontent_resizesurrounded="true"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_launcher"
-            sl:scale_left="190"
-            sl:scale_top="40"
-            sl:scale_width="30"
-            sl:scale_height="30" />
     </com.example.test.oktest.ScalableLayout>
 
     <LinearLayout
-        android:id="@+id/layout2"
-        android:layout_width="0dp"
+        android:id="@+id/layoutMenu"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_height="wrap_content"
         android:background="?android:attr/windowBackground"
         android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:padding="15dp"
-            android:text="oktser1111"
+            android:text="oktser1"
             android:textAppearance="@android:style/TextAppearance.Medium" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:padding="15dp"
-            android:text="okser2222"
+            android:ellipsize="end"
+            android:text="okser2222222"
+            android:singleLine="true"
+            android:textAppearance="@android:style/TextAppearance.Medium" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="okser3"
             android:textAppearance="@android:style/TextAppearance.Medium" />
 
     </LinearLayout>

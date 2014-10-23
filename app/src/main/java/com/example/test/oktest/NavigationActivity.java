@@ -101,9 +101,9 @@ class NavigationActivity extends FragmentActivity
     private Fragment getFragmentView(Context mContext, NavDrawerItem item) {
         switch (item.getPosition()) {
             case 0:
-                return PlaceholderFragment.newInstance(item.getPosition());
+                return new AutoScrollListViewFragment();
             case 1:
-                return SclablelayoutFragment.newInstance("SclablelayoutFragment","test",item.getPosition());
+                return ScalablelayoutFragment.newInstance("SclablelayoutFragment", "test", item.getPosition());
             case 2:
                 return new SwipeRereshFragment();
             case 3:
@@ -137,7 +137,7 @@ class NavigationActivity extends FragmentActivity
             // decide what to show in the action bar.
             getMenuInflater().inflate(R.menu.nav_main, menu);
 //            setActionTitle();
-            Log.d("Navigation", "onCreateOptionsMenu");
+            Log.d("Navigation", NavigationActivity.class.getSimpleName() + "=> onCreateOptionsMenu");
             return true;
         }
         return super.onCreateOptionsMenu(menu);
@@ -145,6 +145,7 @@ class NavigationActivity extends FragmentActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Log.d("Navigation", NavigationActivity.class.getSimpleName() + "=> onOptionsItemSelected");
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
