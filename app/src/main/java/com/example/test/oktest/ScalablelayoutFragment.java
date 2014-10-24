@@ -1,5 +1,6 @@
 package com.example.test.oktest;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -26,7 +27,7 @@ import de.greenrobot.event.EventBus;
  * create an instance of this fragment.
  *
  */
-public class ScalablelayoutFragment extends Fragment {
+public class ScalablelayoutFragment extends BaseFragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String TAG = "SclablelayoutFragment";
@@ -64,9 +65,17 @@ public class ScalablelayoutFragment extends Fragment {
         args.putInt(ARG_PARAM3, position);
         fragment.setArguments(args);
 
-        EventBus.getDefault().register(fragment);
+        /**
+         * Event is posted on {@link com.example.test.oktest.NavigationActivity}.
+         */
+//        EventBus.getDefault().register(fragment);
 
         return fragment;
+    }
+
+    @Override
+    protected void setActionBarOnResume(Activity activity, ActionBar actionBar) {
+
     }
 
     @Override
@@ -82,13 +91,18 @@ public class ScalablelayoutFragment extends Fragment {
         // Activity.onOptionsItemSelected will call Fragment.onOptionsItemSelected
         setHasOptionsMenu(true);
 
-//        EventBus.getDefault().register(fragment);
-        // onCreate 시점이 명확하지 않다... 화면보일때 호출안됨..
+        EventBus.getDefault().registerSticky(this);
+        // onCreate 시점이 늦는다... postEvent보다 늦게 호출되어 이벤트 못받음.. 그래서 registerSticky 로 받는다.
     }
 
     // EventBus Receive Event Methods
     public void onEvent(MyEvent event){
         Log.d(TAG, "EventBus  onEvent called !!!!! ");
+    }
+
+    // EventBus Receive Event Methods posted by a background thread
+    public void onEventMainThread(MyEvent event){
+        Log.d(TAG, "EventBus  onEventMainThread called !!!!! ");
     }
 
     @Override
