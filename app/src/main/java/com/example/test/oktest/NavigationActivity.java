@@ -94,6 +94,9 @@ class NavigationActivity extends FragmentActivity
                         getFragmentView(getApplicationContext(), item))
                 .commit();
 
+        /**
+         * Event Transfer For use in {@link ScalablelayoutFragment}.
+         */
         MyEvent myEvent = new MyEvent();
         EventBus.getDefault().post(myEvent);
     }
