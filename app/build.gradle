@@ -19,6 +19,12 @@
      8. PoppyView (http://itmir.tistory.com/527)
      9. ScalableLayout
      10. EventBus (https://github.com/greenrobot/EventBus)
+
+     AutoScrollListView (https://gist.github.com/jpardogo/70143625771697844896)
+     DragSortListView (https://github.com/bauerca/drag-sort-listview)
+
+     AndroidOpenSource Projects
+     ( https://github.com/Trinea/android-open-project/tree/master/English%20Version )
   */
 apply plugin: 'android'
 apply plugin: 'android-apt'
