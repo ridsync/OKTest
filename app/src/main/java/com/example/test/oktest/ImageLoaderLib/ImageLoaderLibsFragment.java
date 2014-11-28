@@ -1,17 +1,11 @@
 /*******************************************************************************
- * Copyright 2011-2014 Sergey Tarasevich
+ * Android Image Loader Library - GitHub Site URLs
+ * AUIL ( https://github.com/nostra13/Android-Universal-Image-Loader )
+ * Volley ( https://github.com/ogrebgr/android_volley_examples + https://github.com/mcxiaoke/android-volley )
+ * Glide ( https://github.com/bumptech/glide )
+ * Picaso ( http://square.github.io/picasso/ )
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Refernce . http://helloworld.naver.com/helloworld/429368
  *******************************************************************************/
 package com.example.test.oktest.ImageLoaderLib;
 

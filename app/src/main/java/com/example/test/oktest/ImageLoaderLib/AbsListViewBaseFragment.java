@@ -75,6 +75,6 @@ public abstract class AbsListViewBaseFragment extends BaseFragment {
 	}
 
 	private void applyScrollListener() {
-		listView.setOnScrollListener(new PauseOnScrollListener(ImageLoader.getInstance(), pauseOnScroll, pauseOnFling));
+//		listView.setOnScrollListener(new PauseOnScrollListener(ImageLoader.getInstance(), pauseOnScroll, pauseOnFling));
 	}
 }
