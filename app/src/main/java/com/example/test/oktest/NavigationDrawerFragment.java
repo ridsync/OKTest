@@ -109,6 +109,8 @@ public class NavigationDrawerFragment extends Fragment {
         navDrawerItems.add(new NavDrawerItem(4,navMenuTitles[4], navMenuIcons.getResourceId(4, -1)));
         // What's hot, We  will add a counter here
         navDrawerItems.add(new NavDrawerItem(5,navMenuTitles[5], navMenuIcons.getResourceId(5, -1), true, "50+"));
+        navDrawerItems.add(new NavDrawerItem(6,navMenuTitles[6], navMenuIcons.getResourceId(6, -1)) );
+
         // Recycle the typed array
         navMenuIcons.recycle();
 

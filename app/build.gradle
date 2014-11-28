@@ -19,6 +19,7 @@
      8. PoppyView (http://itmir.tistory.com/527)
      9. ScalableLayout
      10. EventBus (https://github.com/greenrobot/EventBus)
+     11. Android Image Loader Library (AUIL , Volley , Glide , Picasso 등등)
 
      AutoScrollListView (https://gist.github.com/jpardogo/70143625771697844896)
      DragSortListView (https://github.com/bauerca/drag-sort-listview)
@@ -55,6 +56,8 @@ dependencies {
     compile "org.androidannotations:androidannotations-api:$AAVersion"
     compile project(':libraries:fablibrary')
     compile 'de.greenrobot:eventbus:2.2.1'
+    compile 'com.mcxiaoke.volley:library:1.0.+'
+    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.3'
 }
 
 apt {
