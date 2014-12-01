@@ -24,23 +24,22 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dip"
             android:layout_marginRight="10dip"
-            android:onClick="onAUILClick"
             android:text="AUIL" />
 
         <Button
+            android:id="@+id/onVolleyClick"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dip"
             android:layout_marginRight="10dip"
-            android:onClick="onVolleyClick"
             android:text="Volley" />
 
         <Button
+            android:id="@+id/onGlideClick"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dip"
             android:layout_marginRight="10dip"
-            android:onClick="onGlideClick"
             android:text="Glide" />
 
         <Button

@@ -20,7 +20,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.test.oktest.FadingActionBar.MainActivity;
-import com.example.test.oktest.ImageLoaderLib.ImageLoaderLibsFragment;
+import com.example.test.oktest.ImageLoaderLib.ImageLoaderMainFragment;
 import com.example.test.oktest.eventbus.MyEvent;
 import com.example.test.oktest.pinnedsection.PinnedSectionListViewFragment;
 
@@ -115,7 +115,7 @@ class NavigationActivity extends FragmentActivity
             case 4:
                 return new ViewPagerFragment(); // ViewPager + FixedTabsSwipe
             case 5:
-                return new ImageLoaderLibsFragment();
+                return new ImageLoaderMainFragment();
             case 6:
                 return PlaceholderFragment.newInstance(item.getPosition());
             default:
