@@ -34,7 +34,7 @@ public class AUILApplication extends Application {
 	@Override
 	public void onCreate() {
         // Thread Policy , Vm Policy 를 설정 해주기위한 코드 at GINGERBREAD 이상 버젼에서만 가능
-        // GB 이상부터 기본적용됨 Cause Main Thread에서 Netowork사용시 ThrowException 발생
+        // GB 이상부터 기본적용됨 Cause Main Thread에서 Netowork사용시 Exception 발생
         // REf. http://javaexpert.tistory.com/483   &&  http://developer.android.com/reference/android/os/StrictMode.html
 		if (Constants.Config.DEVELOPER_MODE && Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
 			StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectAll().penaltyDialog().penaltyLog().build());
