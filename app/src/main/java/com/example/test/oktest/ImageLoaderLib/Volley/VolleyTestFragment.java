@@ -124,7 +124,7 @@ public class VolleyTestFragment extends AbsListViewBaseFragment {
             ImageLoader imageLoader = MyVolley.getImageLoader();
             imageLoader.get(imageUrls[position],
                     ImageLoader.getImageListener(holder.image,
-                            R.drawable.ic_stub,
+                            R.drawable.ic_people,
                             R.drawable.ic_error));
 
 			return view;
