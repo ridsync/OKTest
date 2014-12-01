@@ -12,11 +12,13 @@ package com.example.test.oktest.ImageLoaderLib;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.test.oktest.ImageLoaderLib.Volley.VolleyTestFragment;
 import com.example.test.oktest.R;
 
 public class ImageLoaderMainFragment extends AbsListViewBaseFragment {
@@ -34,21 +36,47 @@ public class ImageLoaderMainFragment extends AbsListViewBaseFragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.container, new AUILTestFragment()).commit();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.container, new AUILTestFragment());
+                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         });
 
-//        Button btn2 = (Button)rootView.findViewById(R.id.onGlideClick);
-//        btn2.setOnClickListener(new View.OnClickListener() {
+        Button btn2 = (Button)rootView.findViewById(R.id.onVolleyClick);
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.container, new VolleyTestFragment());
+                transaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
+
+//        Button btn3 = (Button)rootView.findViewById(R.id.onGlideClick);
+//        btn3.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
 //                getActivity().getSupportFragmentManager()
 //                        .beginTransaction()
-//                        .replace(R.id.container, new GlideTestFragment()).commit();
+//                        .replace(R.id.container, new ()).commit();
 //            }
 //        });
+//        Button btn4 = (Button)rootView.findViewById(R.id.onPicassoClick);
+//        btn4.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                getActivity().getSupportFragmentManager()
+//                        .beginTransaction()
+//                        .replace(R.id.container, new ());
+//                getActivity().getSupportFragmentManager()
+//                        .beginTransaction().addToBackStack(null).commit();
+//            }
+//        });
+
 		return rootView;
 	}
 

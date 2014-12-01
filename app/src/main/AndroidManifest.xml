@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".ImageLoaderLib.AUILApplication"
+        android:name=".ImageLoaderLib.ILLApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_adb"
         android:label="@string/app_name"
