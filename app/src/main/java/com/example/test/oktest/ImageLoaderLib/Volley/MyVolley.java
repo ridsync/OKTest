@@ -29,6 +29,10 @@ public class MyVolley {
         // Use 1/8th of the available memory for this memory cache.
         int cacheSize = 1024 * 1024 * memClass / 8;
         mImageLoader = new ImageLoader(mRequestQueue, new BitmapLruCache(cacheSize));
+
+        // DiskCache
+//        int max_cache_size = 1000000;
+//        mImageLoader = new ImageLoader(mRequestQueue, new DiskBitmapCache(context.getCacheDir(),max_cache_size));
     }
 
 

@@ -78,7 +78,8 @@ public class VolleyTestFragment extends AbsListViewBaseFragment {
 
 	private static class ViewHolder {
 		TextView text;
-		ImageView image;
+        FadeInNetworkImageView netImage;
+        ImageView image;
 	}
 
 	class ImageAdapter extends BaseAdapter {
@@ -109,10 +110,11 @@ public class VolleyTestFragment extends AbsListViewBaseFragment {
 			View view = convertView;
 			final ViewHolder holder;
 			if (convertView == null) {
-				view = inflater.inflate(R.layout.item_list_image, parent, false);
+				view = inflater.inflate(R.layout.item_list_image_volley, parent, false);
 				holder = new ViewHolder();
 				holder.text = (TextView) view.findViewById(R.id.text);
-				holder.image = (ImageView) view.findViewById(R.id.image);
+				holder.netImage = (FadeInNetworkImageView) view.findViewById(R.id.imageVolley);
+				holder.image = (ImageView) view.findViewById(R.id.imageView);
 				view.setTag(holder);
 			} else {
 				holder = (ViewHolder) view.getTag();
@@ -126,6 +128,8 @@ public class VolleyTestFragment extends AbsListViewBaseFragment {
                     ImageLoader.getImageListener(holder.image,
                             R.drawable.ic_people,
                             R.drawable.ic_error));
+
+            holder.netImage.setImageUrl(imageUrls[position], imageLoader);
 
 			return view;
 		}

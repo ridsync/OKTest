@@ -1,7 +1,8 @@
 /*******************************************************************************
  * Android Image Loader Library - GitHub Site URLs
  * AUIL ( https://github.com/nostra13/Android-Universal-Image-Loader )
- * Volley ( https://github.com/ogrebgr/android_volley_examples + https://github.com/mcxiaoke/android-volley )
+ * Volley ( https://github.com/ogrebgr/android_volley_examples / https://github.com/smanikandan14/Volley-demo )
+ *  ( Lib - https://github.com/mcxiaoke/android-volley )
  * Glide ( https://github.com/bumptech/glide ) so Difficult
  * Picaso ( http://square.github.io/picasso/ ) so Simple
  *
