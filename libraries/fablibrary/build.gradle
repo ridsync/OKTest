@@ -9,7 +9,7 @@ android {
     buildToolsVersion "20.0.0"
 
     defaultConfig {
-        applicationId "com.manuelpeinado.fadingactionbar"
+//        applicationId "com.manuelpeinado.fadingactionbar"
         minSdkVersion 16
         targetSdkVersion 20
         versionCode 1
@@ -17,7 +17,7 @@ android {
     }
     buildTypes {
         release {
-            runProguard false
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

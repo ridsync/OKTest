@@ -1,6 +1,8 @@
 /*   ※ SlidingMenuView + ActionBar 컨트롤 라이브러리
      Android Project Example Sources
      1. NavigationDrawer + ActionBar(DrowpDown,FixedTabsSwipe)
+       -> NavigationDrawer (Material Design 적용)
+       ( http://androidhuman.tistory.com/559 , https://github.com/kunny/blog_samples/tree/master/Android/2014-11-16_Material_Navigation_Drawer )
      2. ViewPager (PagerTabStrip,PagerTitleStrip,ScrollTab)
      3. FadingActionBar 까지 적용함
      4. SlidingMenu
@@ -31,7 +33,7 @@ apply plugin: 'android'
 apply plugin: 'android-apt'
 def AAVersion = '3.1'
 
-mainClassName = "com.example.test.oktest.NavigationActivity_"
+/*mainClassName = "com.example.test.oktest.NavigationActivity_"*/
 
 buildscript {
     repositories {
@@ -39,7 +41,7 @@ buildscript {
     }
     dependencies {
         // replace with the current version of the Android plugin
-        classpath 'com.android.tools.build:gradle:0.13+'
+        classpath 'com.android.tools.build:gradle:1.0.0'
         // the latest version of the android-apt plugin
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
     }
@@ -51,7 +53,7 @@ repositories {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:support-v4:20.0.0'
+    compile 'com.android.support:appcompat-v7:21.0.0'
     apt "org.androidannotations:androidannotations:$AAVersion"
     compile "org.androidannotations:androidannotations-api:$AAVersion"
     compile project(':libraries:fablibrary')
@@ -62,14 +64,15 @@ dependencies {
 
 apt {
     arguments {
-        androidManifestFile variant.processResources.manifestFile
+//        androidManifestFile variant.processResources.manifestFile
+        androidManifestFile variant.outputs[0].processResources.manifestFile
         resourcePackageName 'com.example.test.oktest'
     }
 }
 
 android {
 
-    compileSdkVersion 20
+    compileSdkVersion 21
     buildToolsVersion '20.0.0'
 
     signingConfigs {
@@ -84,24 +87,24 @@ android {
     defaultConfig {
         applicationId 'com.example.test.oktest'
         minSdkVersion 16
-        targetSdkVersion 20
+        targetSdkVersion 21
         versionCode 1
         versionName '1.0'
     }
 
     buildTypes {
         release {
-            runProguard true
+            minifyEnabled true
             debuggable false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
             signingConfig signingConfigs.release
-            zipAlign true
+            zipAlignEnabled true
         }
         debug {
-            runProguard false
+            minifyEnabled false
             debuggable true
             applicationIdSuffix ".debug"
-            zipAlign false
+            zipAlignEnabled false
         }
     }
 
