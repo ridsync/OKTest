@@ -95,4 +95,9 @@
 
     <!-- Content descriptions -->
     <string name="descr_image">Image</string>
+
+
+    <string name="scanning">Scanning...</string>
+    <string name="menu_standard">Standard</string>
+    <string name="menu_metric">Metric</string>
 </resources>
