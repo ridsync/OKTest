@@ -23,6 +23,7 @@ import android.content.SharedPreferences;
 import android.hardware.SensorManager;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
@@ -43,7 +44,7 @@ public class RadarActivity extends Activity {
     private static final int MENU_METRIC = Menu.FIRST + 2;
 
     private static final String RADAR = "radar";
-    
+
     private static final String PREF_METRIC = "metric";
 
     private SensorManager mSensorManager;
@@ -53,7 +54,7 @@ public class RadarActivity extends Activity {
     private LocationManager mLocationManager;
 
     private SharedPreferences mPrefs;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,12 +63,12 @@ public class RadarActivity extends Activity {
         mRadar = (RadarView) findViewById(R.id.radar);
         mSensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
         mLocationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-     
+
         // Metric or standard units?
         mPrefs = getSharedPreferences(RADAR, MODE_PRIVATE);
         boolean useMetric = mPrefs.getBoolean(PREF_METRIC, false);
         mRadar.setUseMetric(useMetric);
-        
+
         // Read the target from our intent
         Intent i = getIntent();
         int latE6 = (int)(i.getFloatExtra("latitude", 0) * GeoUtils.MILLION);
@@ -75,22 +76,30 @@ public class RadarActivity extends Activity {
         mRadar.setTarget(latE6, lonE6);
         mRadar.setDistanceView((TextView) findViewById(R.id.distance));
     }
-    
+
     @Override
     protected void onResume()
     {
         super.onResume();
         mSensorManager.registerListener(mRadar, SensorManager.SENSOR_ORIENTATION,
                 SensorManager.SENSOR_DELAY_GAME);
- 
+
         // Start animating the radar screen
         mRadar.startSweep();
-        
+
         // Register for location updates
-        mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                LOCATION_UPDATE_INTERVAL_MILLIS, 1, mRadar);
+//        mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+//                LOCATION_UPDATE_INTERVAL_MILLIS, 1, mRadar);
         mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
                 LOCATION_UPDATE_INTERVAL_MILLIS, 1, mRadar);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mRadar.updateDistance(10);
+            }
+        }, 4000);
+
     }
 
     @Override
@@ -98,12 +107,12 @@ public class RadarActivity extends Activity {
     {
         mSensorManager.unregisterListener(mRadar);
         mLocationManager.removeUpdates(mRadar);
-        
+
         // Stop animating the radar screen
         mRadar.stopSweep();
         super.onStop();
     }
-    
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
@@ -115,18 +124,18 @@ public class RadarActivity extends Activity {
                 .setAlphabeticShortcut('C');
         return true;
     }
-    
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-        case MENU_STANDARD: {
-            setUseMetric(false);
-            return true;
-        }
-        case MENU_METRIC: {
-            setUseMetric(true);
-            return true;
-        }
+            case MENU_STANDARD: {
+                setUseMetric(false);
+                return true;
+            }
+            case MENU_METRIC: {
+                setUseMetric(true);
+                return true;
+            }
         }
 
         return super.onOptionsItemSelected(item);

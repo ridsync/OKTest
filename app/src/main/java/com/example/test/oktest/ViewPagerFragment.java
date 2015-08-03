@@ -81,7 +81,12 @@ public class ViewPagerFragment extends BaseFragment implements
         mViewPager = (ViewPager) rootView.findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-
+        mViewPager.setPageTransformer(false, new ViewPager.PageTransformer() {
+            @Override
+            public void transformPage(View page, float position) {
+                page.setTranslationX(position < 0 ? 0f : -page.getWidth() * position);
+            }
+        });
         return  rootView;
     }
 
