@@ -1,4 +1,4 @@
-package com.example.test.oktest;
+package com.example.test.oktest.ui;
 
 import android.app.Activity;
 import android.content.Context;
@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
+
+import com.example.test.oktest.R;
 
 /**
  * 무한 스크롤되는 뷰페이저 샘플

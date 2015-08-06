@@ -1,4 +1,4 @@
-package com.example.test.oktest;
+package com.example.test.oktest.ui;
 
 import android.app.ActionBar;
 import android.app.Activity;

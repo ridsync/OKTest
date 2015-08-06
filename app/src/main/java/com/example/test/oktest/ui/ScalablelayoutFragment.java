@@ -1,4 +1,4 @@
-package com.example.test.oktest;
+package com.example.test.oktest.ui;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -15,6 +15,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.test.oktest.NavigationActivity;
+import com.example.test.oktest.R;
+import com.example.test.oktest.ScalableLayout;
 import com.example.test.oktest.eventbus.MyEvent;
 import de.greenrobot.event.EventBus;
 

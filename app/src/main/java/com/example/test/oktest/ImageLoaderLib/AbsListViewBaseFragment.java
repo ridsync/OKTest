@@ -17,7 +17,7 @@ package com.example.test.oktest.ImageLoaderLib;
 
 import android.widget.AbsListView;
 
-import com.example.test.oktest.BaseFragment;
+import com.example.test.oktest.ui.BaseFragment;
 
 /**
  * @author Sergey Tarasevich (nostra13[at]gmail[dot]com)

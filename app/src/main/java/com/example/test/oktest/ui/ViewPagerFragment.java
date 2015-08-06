@@ -1,4 +1,4 @@
-package com.example.test.oktest;
+package com.example.test.oktest.ui;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -13,6 +13,12 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.test.oktest.R;
+import com.example.test.oktest.Tab1;
+import com.example.test.oktest.Tab2;
+import com.example.test.oktest.Tab3;
+import com.example.test.oktest.Tab4;
 
 import java.util.Locale;
 

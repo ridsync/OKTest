@@ -1,4 +1,4 @@
-package com.example.test.oktest;
+package com.example.test.oktest.ui;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -18,6 +18,8 @@ import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.example.test.oktest.R;
 
 import java.util.Arrays;
 import java.util.Vector;

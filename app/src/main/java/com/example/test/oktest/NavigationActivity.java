@@ -5,6 +5,8 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,20 +19,29 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.albinmathew.transitions.fragment.ExitFragmentTransition;
+import com.albinmathew.transitions.fragment.FragmentTransition;
+import com.albinmathew.transitions.fragment.FragmentTransitionLauncher;
 import com.example.test.oktest.FadingActionBar.MainActivity;
 import com.example.test.oktest.ImageLoaderLib.ImageLoaderMainFragment;
 import com.example.test.oktest.eventbus.MyEvent;
 import com.example.test.oktest.pinnedsection.PinnedSectionListViewFragment;
+import com.example.test.oktest.ui.AutoScrollListViewFragment;
+import com.example.test.oktest.ui.BaseFragment;
+import com.example.test.oktest.ui.ScalablelayoutFragment;
+import com.example.test.oktest.ui.SwipeRereshFragment;
+import com.example.test.oktest.ui.ViewPagerFragment;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 
 import de.greenrobot.event.EventBus;
 
-@EActivity(R.layout.activity_test_main)
-class NavigationActivity extends FragmentActivity
+//@EActivity(R.layout.activity_test_main)
+public class NavigationActivity extends FragmentActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     /**
@@ -47,7 +58,7 @@ class NavigationActivity extends FragmentActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.activity_test_main);
         // Set up the action bar to show a dropdown list.
         // ActionBar를 각 Contents Fragment에서 설정하도록 하는게 나을듯?
         // ActionBar + ViewPager 연동을 하기에...
@@ -56,9 +67,15 @@ class NavigationActivity extends FragmentActivity
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
 
+        initViews();
     }
 
-    @AfterViews
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    //    @AfterViews
     public void initViews(){
         Log.d("TAG","@AfterViews ");
 
@@ -164,8 +181,17 @@ class NavigationActivity extends FragmentActivity
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+//        getFragmentManager().getBackStackEntryAt(0).
+    }
+
     /**
      * A placeholder fragment containing a simple view.
+     *  @see  PreLollipopTransition Test
+     * // https://github.com/albinmathew/PreLollipopTransition
      */
     public static class PlaceholderFragment extends BaseFragment implements ActionBar.OnNavigationListener{
         /**
@@ -193,14 +219,22 @@ class NavigationActivity extends FragmentActivity
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.frag_test_main, container, false);
-            TextView tv = (TextView)rootView.findViewById(R.id.section_label_2);
+            final View rootView = inflater.inflate(R.layout.frag_test_main, container, false);
+            final TextView tv = (TextView)rootView.findViewById(R.id.section_label_2);
+            final ImageView iv = (ImageView)rootView.findViewById(R.id.start_image);
             Button bt = (Button)rootView.findViewById(R.id.section_label);
             bt.setOnClickListener(new View.OnClickListener() {
                       @Override
                       public void onClick(View v) {
-                          Intent intent = new Intent(getActivity(), MainActivity.class);
-                            startActivity(intent);
+//                          Intent intent = new Intent(getActivity(), MainActivity.class);
+//                            startActivity(intent);
+                          final TargetFragment toFragment = TargetFragment.newInstance(2);
+                          FragmentTransitionLauncher
+                                  .with(iv.getContext())
+//                                  .image(((BitmapDrawable) ((ImageView) iv).getDrawable()).getBitmap());
+                                  .image((BitmapFactory.decodeResource(getResources(), R.drawable.ny)) )
+                                    .from(iv).prepare(toFragment);
+                          getFragmentManager().beginTransaction().replace(R.id.container, toFragment).addToBackStack(null).commit();
                       }
                   }
             );
@@ -216,6 +250,59 @@ class NavigationActivity extends FragmentActivity
             // container view.
 
             return true;
+        }
+
+        @Override
+        protected void setActionBarOnResume(Activity activity, ActionBar actionbar) {
+            ((NavigationActivity) activity).onSectionAttached(
+                    getArguments().getInt(ARG_SECTION_NUMBER));
+        }
+
+        @Override
+        public void onAttach(Activity activity) {
+            super.onAttach(activity);
+        }
+    }
+
+    /**
+     * A placeholder fragment containing a simple view.
+     */
+    public static class TargetFragment extends BaseFragment{
+        /**
+         * The fragment argument representing the section number for this
+         * fragment.
+         */
+        private static final String ARG_SECTION_NUMBER = "section_number";
+        private static final String ARG_SECTION_DRAWER_ITEM = "nav_drawer_item";
+        /**
+         * Returns a new instance of this fragment for the given section
+         * number.
+         */
+        public static TargetFragment newInstance(int sectionNumber) {
+            TargetFragment fragment = new TargetFragment();
+            Bundle args = new Bundle();
+            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+//            args.putParcelable(ARG_SECTION_DRAWER_ITEM, item);
+            fragment.setArguments(args);
+            return fragment;
+        }
+
+        public TargetFragment() {
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.frag_target_main, container, false);
+            final TextView tv = (TextView)rootView.findViewById(R.id.section_label_2);
+            final ImageView iv = (ImageView)rootView.findViewById(R.id.target_image);
+            final ExitFragmentTransition exitFragmentTransition = FragmentTransition.with(this).to(iv).start(savedInstanceState);
+            exitFragmentTransition.startExitListening();
+
+            int num = getArguments().getInt(ARG_SECTION_NUMBER);
+            tv.setText("SECTION_NUMBER  = " + String.valueOf(num));
+
+            return rootView;
         }
 
         @Override

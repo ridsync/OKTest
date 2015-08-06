@@ -14,12 +14,12 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".NavigationActivity_"
+            android:name=".NavigationActivity"
             android:label="@string/app_name" >
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <!--
         Style 적용해야 ActionBar 배경이 Transparent 적용됩니다.
@@ -44,7 +44,7 @@
         </activity>
 
         <activity
-            android:name=".CircularViewPagerSampeActivity"
+            android:name=".ui.CircularViewPagerSampeActivity"
             android:label="ExampleWebViewActivity" >
             <intent-filter>
             <action android:name="android.intent.action.MAIN" />
