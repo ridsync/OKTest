@@ -39,13 +39,14 @@
 
     <!-- Nav Drawer Menu Items -->
     <string-array name="nav_drawer_menu_items">
-        <item>Placeholder</item>
+        <item>AutoScrollListViewFragment</item>
         <item>Scalablelayout</item>
-        <item>Photos</item>
+        <item>SwipeRereshFragment</item>
         <item>PinnedSectionListView</item>
-        <item>ViewPager</item>
+        <item>ViewPager+FixedTabsSwipe</item>
         <item>AndroidImageLoaderLibs</item>
-        <item>Settings</item>
+        <item>PrelollipopTransition</item>
+        <item>NestedScrollTest</item>
     </string-array>
 
     <!-- Nav Drawer List Item Icons -->
@@ -57,6 +58,7 @@
         <item>@drawable/ic_communities</item>
         <item>@drawable/ic_pages</item>
         <item>@drawable/ic_whats_hot</item>
+        <item>@drawable/ic_pages</item>
     </array>
 
     <string name="empty">No items found!</string>

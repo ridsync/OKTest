@@ -31,6 +31,7 @@ import com.example.test.oktest.eventbus.MyEvent;
 import com.example.test.oktest.pinnedsection.PinnedSectionListViewFragment;
 import com.example.test.oktest.ui.AutoScrollListViewFragment;
 import com.example.test.oktest.ui.BaseFragment;
+import com.example.test.oktest.ui.NestedScrollFragment;
 import com.example.test.oktest.ui.ScalablelayoutFragment;
 import com.example.test.oktest.ui.SwipeRereshFragment;
 import com.example.test.oktest.ui.ViewPagerFragment;
@@ -134,7 +135,9 @@ public class NavigationActivity extends FragmentActivity
             case 5:
                 return new ImageLoaderMainFragment();
             case 6:
-                return PlaceholderFragment.newInstance(item.getPosition());
+                return PlaceholderFragment.newInstance(item.getPosition()); // PrelollipopTransition
+            case 7:
+                return new NestedScrollFragment(); // PrelollipopTransition
             default:
                 return PlaceholderFragment.newInstance(item.getPosition());
         }
@@ -231,8 +234,8 @@ public class NavigationActivity extends FragmentActivity
                           final TargetFragment toFragment = TargetFragment.newInstance(2);
                           FragmentTransitionLauncher
                                   .with(iv.getContext())
-//                                  .image(((BitmapDrawable) ((ImageView) iv).getDrawable()).getBitmap());
-                                  .image((BitmapFactory.decodeResource(getResources(), R.drawable.ny)) )
+                                  .image(((BitmapDrawable) iv.getDrawable()).getBitmap())
+//                                  .image((BitmapFactory.decodeResource(getResources(), R.drawable.ny)) )
                                     .from(iv).prepare(toFragment);
                           getFragmentManager().beginTransaction().replace(R.id.container, toFragment).addToBackStack(null).commit();
                       }

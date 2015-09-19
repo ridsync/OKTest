@@ -110,7 +110,7 @@ public class NavigationDrawerFragment extends Fragment {
         // What's hot, We  will add a counter here
         navDrawerItems.add(new NavDrawerItem(5,navMenuTitles[5], navMenuIcons.getResourceId(5, -1), true, "50+"));
         navDrawerItems.add(new NavDrawerItem(6,navMenuTitles[6], navMenuIcons.getResourceId(6, -1)) );
-
+        navDrawerItems.add(new NavDrawerItem(7,navMenuTitles[7], navMenuIcons.getResourceId(7, -1)) );
         // Recycle the typed array
         navMenuIcons.recycle();
 
