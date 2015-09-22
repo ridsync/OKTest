@@ -129,7 +129,7 @@ public class NestedScrollFragment extends BaseFragment implements NestedScrollVi
 
         // Defatul Setting
         mFlexibleSpaceImageHeight = getResources().getDimensionPixelSize(R.dimen.flexible_space_image_height);
-        // Ω√Ω∫≈€ªÛ Ω«¡¶ æ◊º«πŸªÁ¿Ã¡Ó∏¶ ∞°¡ÆøÕæﬂ«—¥Ÿ...;
+        // Ïã§Ï†ú Ïï°ÏÖòÎ∞î ÏÇ¨Ïù¥Ï¶àÎ•º ÎÑ£Ïñ¥ÏïºÌï®.
         mActionBarSize = getResources().getDimensionPixelSize(R.dimen.flexible_space_actionbar);
 
         mScrollView = (NestedScrollView) view.findViewById(R.id.scroll);
@@ -142,7 +142,7 @@ public class NestedScrollFragment extends BaseFragment implements NestedScrollVi
         ScrollViewUtils.addOnGlobalLayoutListener(mScrollView, new Runnable() {
             @Override
             public void run() {
-                mScrollView.scrollTo(0, mFlexibleSpaceImageHeight - mActionBarSize);
+                mScrollView.scrollTo(0, 0);
 
                 // If you'd like to start from scrollY == 0, don't write like this:
                 //mScrollView.scrollTo(0, 0);
@@ -163,6 +163,8 @@ public class NestedScrollFragment extends BaseFragment implements NestedScrollVi
     @Override
     public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
         // Translate overlay and image
+        Log.d("NestedScroll", " onScrollChanged : scrollY = " +  scrollY + "firstScroll = " + firstScroll
+         + "dragging = " + dragging);
         float flexibleRange = mFlexibleSpaceImageHeight - mActionBarSize;
         int minOverlayTransitionY = mActionBarSize - mImageView.getHeight();
 //        mOverlayView.setTranslationY( ScrollViewUtils.getFloat(-scrollY, minOverlayTransitionY, 0));
@@ -179,9 +181,9 @@ public class NestedScrollFragment extends BaseFragment implements NestedScrollVi
         mTitleView.setScaleY(scale);
 
         // Translate title text
-        int maxTitleTranslationY = (int) (mFlexibleSpaceImageHeight - mTitleView.getHeight() * scale);
-        int titleTranslationY = maxTitleTranslationY - scrollY;
-        mTitleView.setTranslationY(titleTranslationY);
+//        int maxTitleTranslationY = (int) (mFlexibleSpaceImageHeight - mTitleView.getHeight() * scale);
+//        int titleTranslationY = maxTitleTranslationY - scrollY;
+        mTitleView.setTranslationY( - scrollY);
 
         // Translate FAB
 //        int maxFabTranslationY = mFlexibleSpaceImageHeight - mFab.getHeight() / 2;
