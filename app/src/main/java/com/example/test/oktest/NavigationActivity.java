@@ -9,7 +9,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
@@ -81,7 +81,7 @@ public class NavigationActivity extends FragmentActivity
         Log.d("TAG","@AfterViews ");
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
-                getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
+                getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
 
         // Set up the drawer.
@@ -107,7 +107,7 @@ public class NavigationActivity extends FragmentActivity
     @Override
     public void onNavigationDrawerItemSelected(NavDrawerItem item) {
         // update the main content by replacing fragments
-        getSupportFragmentManager()
+        getFragmentManager()
                 .beginTransaction()
                 .replace(R.id.container,
                         getFragmentView(getApplicationContext(), item))

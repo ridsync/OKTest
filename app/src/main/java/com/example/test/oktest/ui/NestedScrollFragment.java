@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.test.oktest.R;
+import com.example.test.oktest.pinnedsection.PinnedSectionListViewFragment;
 
 /**
  * 1) NestedScrollFragment
@@ -154,6 +155,20 @@ public class NestedScrollFragment extends BaseFragment implements NestedScrollVi
                 // This causes scroll change from 1 to 0.
                 //mScrollView.scrollTo(0, 1);
                 //mScrollView.scrollTo(0, 0);
+            }
+        });
+
+        view.findViewById(R.id.emptyView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PinnedSectionListViewFragment frag = new PinnedSectionListViewFragment();
+//                frag.setAllowEnterTransitionOverlap(true);
+                getActivity().getFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(R.animator.second_frag_enter, R.animator.first_frag_exit, R.animator.first_frag_enter, R.animator.second_frag_exit)
+                        .addToBackStack(null)
+                        .add(R.id.container,frag)
+                        .commit();
             }
         });
 
