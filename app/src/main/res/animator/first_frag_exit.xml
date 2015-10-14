@@ -1,41 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<set xmlns:android="http://schemas.android.com/apk/res/android" >
+<set xmlns:android="http://schemas.android.com/apk/res/android">
 
     <objectAnimator
         android:interpolator="@android:anim/linear_interpolator"
         android:propertyName="translationX"
         android:valueType="floatType"
         android:valueFrom="0"
-        android:valueTo="-10dp"
-        android:duration="200"/>
+        android:valueTo="-300"
+        android:startOffset="100"
+        android:duration="300"/>
 
     <objectAnimator
         android:interpolator="@android:anim/linear_interpolator"
         android:propertyName="scaleX"
         android:valueType="floatType"
         android:valueFrom="1"
-        android:valueTo="0.8"
-        android:startOffset="100"
+        android:valueTo="0.9"
         android:pivotX="50%"
         android:pivotY="50%"
-        android:duration="200"/>
+        android:duration="300"/>
 
     <objectAnimator
         android:interpolator="@android:anim/linear_interpolator"
         android:propertyName="scaleY"
         android:valueType="floatType"
         android:valueFrom="1"
-        android:valueTo="0.8"
-        android:startOffset="100"
+        android:valueTo="0.9"
         android:pivotX="50%"
         android:pivotY="50%"
-        android:duration="200"/>
+        android:duration="300"/>
 
     <objectAnimator
         android:interpolator="@android:anim/linear_interpolator"
         android:propertyName="alpha"
         android:valueType="floatType"
-        android:valueFrom="1.0"
-        android:valueTo="0.5"
-        android:duration="200"/>
+        android:valueFrom="1"
+        android:valueTo="0.2"
+        android:duration="300"/>
 </set>

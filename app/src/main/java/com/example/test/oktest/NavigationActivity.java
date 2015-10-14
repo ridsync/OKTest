@@ -3,6 +3,7 @@ package com.example.test.oktest;
 import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
@@ -109,8 +110,9 @@ public class NavigationActivity extends FragmentActivity
         // update the main content by replacing fragments
         getFragmentManager()
                 .beginTransaction()
+                .addToBackStack(null)
                 .replace(R.id.container,
-                        getFragmentView(getApplicationContext(), item))
+                        getFragmentView(getApplicationContext(), item), item.getTitle())
                 .commit();
 
         /**
@@ -186,9 +188,14 @@ public class NavigationActivity extends FragmentActivity
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-
-//        getFragmentManager().getBackStackEntryAt(0).
+        int size = getFragmentManager().getBackStackEntryCount();
+        if (getFragmentManager().getBackStackEntryCount() > 0){
+            getFragmentManager().popBackStackImmediate();
+            getFragmentManager().popBackStackImmediate();
+//            findViewById(R.id.container).bringToFront();
+        } else {
+            super.onBackPressed();
+        }
     }
 
     /**

@@ -1,10 +1,13 @@
 package com.example.test.oktest.ui;
 
+import android.animation.Animator;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.transition.Slide;
+import android.transition.Transition;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -78,7 +81,7 @@ public class NestedScrollFragment extends BaseFragment implements NestedScrollVi
     }
     @Override
     protected void setActionBarOnResume(Activity activity, ActionBar actionBar) {
-        actionBar.hide();
+//        actionBar.hide();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
         actionBar.setSubtitle(NestedScrollFragment.class.getSimpleName());
 
@@ -163,16 +166,31 @@ public class NestedScrollFragment extends BaseFragment implements NestedScrollVi
             public void onClick(View v) {
                 PinnedSectionListViewFragment frag = new PinnedSectionListViewFragment();
 //                frag.setAllowEnterTransitionOverlap(true);
+
+                getActivity().getFragmentManager()
+                        .beginTransaction()
+                        .addToBackStack(null)
+                        .setCustomAnimations(R.animator.second_frag_enter, R.animator.first_frag_exit, R.animator.first_frag_enter, R.animator.second_frag_exit)
+                        .remove(NestedScrollFragment.this)
+                        .commit();
+
                 getActivity().getFragmentManager()
                         .beginTransaction()
                         .setCustomAnimations(R.animator.second_frag_enter, R.animator.first_frag_exit, R.animator.first_frag_enter, R.animator.second_frag_exit)
                         .addToBackStack(null)
-                        .add(R.id.container,frag)
+                        .add(R.id.container2, frag, "dff")
                         .commit();
+
+
             }
         });
 
         return view;
+    }
+
+    @Override
+    public Animator onCreateAnimator(int transit, boolean enter, int nextAnim) {
+        return super.onCreateAnimator(transit, enter, nextAnim);
     }
 
     @Override
